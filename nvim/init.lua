@@ -106,4 +106,8 @@ vim.lsp.enable({
 	"lua_ls", "terraformls", "ruff", "yamlls", "pyright",
 })
 
+require 'nightfox'.setup({
+	transparent = true,
+})
+
 vim.cmd("colorscheme duskfox")
