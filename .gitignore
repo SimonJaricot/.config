@@ -1,3 +1,4 @@
 /*
 !.gitignore
+!starship.toml
 !nvim/
