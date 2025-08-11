@@ -12,6 +12,12 @@ vim.opt.termguicolors = true
 vim.opt.undofile = true
 vim.opt.incsearch = true
 vim.opt.signcolumn = "yes"
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldcolumn = '1' -- Show fold column
+vim.opt.foldtext = ""
+vim.opt.foldlevel = 99 -- Set a high fold level to keep folds open by default
+vim.opt.foldlevelstart = 1
 
 vim.g.mapleader = ' '
 
