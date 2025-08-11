@@ -28,6 +28,8 @@ vim.pack.add({
 	{ src = "https://github.com/nvim-lualine/lualine.nvim" },
 	{ src = "https://github.com/zbirenbaum/copilot.lua" },
 	{ src = "https://github.com/fang2hou/blink-copilot" },
+	{ src = "https://github.com/nvim-lua/plenary.nvim" },
+	{ src = "https://github.com/CopilotC-Nvim/CopilotChat.nvim" },
 })
 
 require 'mason'.setup()
@@ -90,6 +92,22 @@ require 'nvim-treesitter.configs'.setup({
 
 require 'lualine'.setup({})
 
+require 'CopilotChat'.setup({
+	window = {
+		layout = 'float',
+		border = "rounded", -- Border style for the chat window
+		height = 40, -- Height of the chat window
+		width = 80, -- Width of the chat window
+		zindex = 100, -- Z-index for the chat window
+		title = "Copilot Chat", -- Title for the chat window
+	},
+	headers = {
+		user = '👤 You: ',
+    assistant = '🤖 Copilot: ',
+    tool = '🔧 Tool: ',
+	},
+})
+
 
 local map = vim.keymap.set
 
@@ -107,6 +125,7 @@ map('n', '<C-h>', '<C-w>h', { desc = 'Move to the window on the left', noremap =
 map('n', '<C-j>', '<C-w>j', { desc = 'Move to the window on the bottom', noremap = true, silent = true })
 map('n', '<C-k>', '<C-w>k', { desc = 'Move to the window on the top', noremap = true, silent = true })
 map('n', '<C-l>', '<C-w>l', { desc = 'Move to the window on the right', noremap = true, silent = true })
+map('n', '<leader>cc', ':CopilotChatToggle<CR>', { desc = 'Toggle CopilotChat', noremap = true, silent = true })
 
 vim.diagnostic.config({
 	virtual_text = false,    -- Show diagnostic messages as virtual text in the editor
@@ -131,10 +150,5 @@ vim.lsp.enable({
 require 'nightfox'.setup({
 	transparent = true,
 })
-
--- create a function that return the square of a given number:
-function square(x)
-return x 	
-end
 
 vim.cmd("colorscheme duskfox")
