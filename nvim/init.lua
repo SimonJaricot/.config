@@ -26,6 +26,8 @@ vim.pack.add({
 	{ src = "https://github.com/Saghen/blink.cmp" },
 	{ src = "https://github.com/EdenEast/nightfox.nvim" },
 	{ src = "https://github.com/nvim-lualine/lualine.nvim" },
+	{ src = "https://github.com/zbirenbaum/copilot.lua" },
+	{ src = "https://github.com/fang2hou/blink-copilot" },
 })
 
 require 'mason'.setup()
@@ -42,12 +44,26 @@ require 'oil'.setup({
 	},
 })
 require 'which-key'.setup()
+
+require 'copilot'.setup({
+	suggestion = { enabled = false },
+  panel = { enabled = false },
+})
+
 require 'blink-cmp'.setup({
 	completion = {
 		documentation = { auto_show = true },
 	},
 	sources = {
-		default = { "lsp", "snippets", "path", "buffer", "omni" }
+		default = { "copilot", "lsp", "snippets", "path", "buffer", "omni" },
+		providers = {
+			copilot = {
+				name = "copilot",
+				module = "blink-copilot",
+				score_offset = 100,
+				async = true,
+			},
+		},
 	},
 	keymap = {
 		preset = "default",
@@ -68,6 +84,7 @@ require 'nvim-treesitter.configs'.setup({
 })
 
 require 'lualine'.setup({})
+
 
 local map = vim.keymap.set
 
@@ -109,5 +126,10 @@ vim.lsp.enable({
 require 'nightfox'.setup({
 	transparent = true,
 })
+
+-- create a function that return the square of a given number:
+function square(x)
+return x 	
+end
 
 vim.cmd("colorscheme duskfox")
