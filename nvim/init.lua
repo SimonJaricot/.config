@@ -45,10 +45,7 @@ require 'oil'.setup({
 })
 require 'which-key'.setup()
 
-require 'copilot'.setup({
-	suggestion = { enabled = false },
-  panel = { enabled = false },
-})
+require 'copilot'.setup()
 
 require 'blink-cmp'.setup({
 	completion = {
