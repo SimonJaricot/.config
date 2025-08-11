@@ -45,7 +45,15 @@ require 'oil'.setup({
 })
 require 'which-key'.setup()
 
-require 'copilot'.setup()
+require 'copilot'.setup {
+	filetypes = {
+		markdown = true,
+		terraform = true,
+		yaml = true,
+		javascript = true,
+		typescript = true,
+	},
+}
 
 require 'blink-cmp'.setup({
 	completion = {
