@@ -30,6 +30,7 @@ vim.pack.add({
 	{ src = "https://github.com/fang2hou/blink-copilot" },
 	{ src = "https://github.com/nvim-lua/plenary.nvim" },
 	{ src = "https://github.com/CopilotC-Nvim/CopilotChat.nvim" },
+	{ src = "https://github.com/lewis6991/gitsigns.nvim" },
 })
 
 require 'mason'.setup()
@@ -119,13 +120,38 @@ map('n', '<leader>lf', vim.lsp.buf.format, { desc = 'Format file' })
 map('n', '<leader>ff', ':Pick files<CR>', { desc = 'Find files' })
 map('n', '<leader>fg', ':Pick grep_live<CR>', { desc = 'Find in files (grep_live)' })
 map('n', '<leader>x', '<C-w>d', { desc = 'Show cursor diagnostic message', noremap = true, silent = true })
-map('n', '<leader>t', ':bot term<CR>', { desc = 'Open the terminal', noremap = true, silent = true })
+map('n', '<leader>te', ':bot term<CR>', { desc = 'Open the terminal', noremap = true, silent = true })
 map('t', '<Esc>', [[<C-\><C-n>]], { desc = 'Exit terminal mode', noremap = true, silent = true })
 map('n', '<C-h>', '<C-w>h', { desc = 'Move to the window on the left', noremap = true, silent = true })
 map('n', '<C-j>', '<C-w>j', { desc = 'Move to the window on the bottom', noremap = true, silent = true })
 map('n', '<C-k>', '<C-w>k', { desc = 'Move to the window on the top', noremap = true, silent = true })
 map('n', '<C-l>', '<C-w>l', { desc = 'Move to the window on the right', noremap = true, silent = true })
 map('n', '<leader>cc', ':CopilotChatToggle<CR>', { desc = 'Toggle CopilotChat', noremap = true, silent = true })
+
+local gitsigns = require('gitsigns')
+
+map('n', '<leader>hp', gitsigns.preview_hunk, { desc = 'Preview hunk' })
+map('n', '<leader>hi', gitsigns.preview_hunk_inline, { desc = 'Preview hunk inline' })
+map('n', '<leader>hb', function()
+	gitsigns.blame_line({ full = true })
+end, { desc = "Blame in line" } )
+
+map('n', '<leader>hd', gitsigns.diffthis, { desc = 'Diff this hunk' })
+
+map('n', '<leader>hD', function()
+	gitsigns.diffthis('~')
+end, { desc = 'Diff this hunk with the previous commit' })
+
+map('n', '<leader>hQ', function() gitsigns.setqflist('all') end, { desc = 'Set quickfix list with all hunks' })
+map('n', '<leader>hq', gitsigns.setqflist, { desc = 'Set quickfix list with current hunk' })
+
+-- Toggles
+map('n', '<leader>tb', gitsigns.toggle_current_line_blame, { desc = 'Toggle current line blame' })
+map('n', '<leader>tw', gitsigns.toggle_word_diff, { desc = 'Toggle word diff' })
+
+-- Text object
+map({'o', 'x'}, 'ih', gitsigns.select_hunk, { desc = 'Select hunk' })
+
 
 vim.diagnostic.config({
 	virtual_text = false,    -- Show diagnostic messages as virtual text in the editor
