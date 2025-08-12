@@ -119,7 +119,7 @@ require 'CopilotChat'.setup({
 require 'mini.pairs'.setup()
 require 'mini.surround'.setup({
 	mappings = {
-		add = 'si',
+		add = 'sa',
 		delete = 'sd',
 		find = 'sf',
 		find_left = 'sF',
@@ -128,7 +128,13 @@ require 'mini.surround'.setup({
 	},
 })
 
--- this is some tests for mini.surround
+require 'mini.icons'.setup()
+require 'mini.tabline'.setup({
+	show_icons = true,
+})
+
+
+-- { this is some tests for mini.surround }
 
 local map = vim.keymap.set
 
@@ -147,6 +153,9 @@ map('n', '<C-j>', '<C-w>j', { desc = 'Move to the window on the bottom', noremap
 map('n', '<C-k>', '<C-w>k', { desc = 'Move to the window on the top', noremap = true, silent = true })
 map('n', '<C-l>', '<C-w>l', { desc = 'Move to the window on the right', noremap = true, silent = true })
 map('n', '<leader>cc', ':CopilotChatToggle<CR>', { desc = 'Toggle CopilotChat', noremap = true, silent = true })
+-- redefine [b (tab nabigation) to another keymap <Tab> to use mini.tabline
+map('n', '<Tab>', ':bnext<CR>', { desc = 'Next tab', noremap = true, silent = true })
+map('n', '<S-Tab>', ':bprevious<CR>', { desc = 'Previous tab', noremap = true, silent = true })
 
 local gitsigns = require('gitsigns')
 
