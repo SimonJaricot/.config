@@ -37,6 +37,7 @@ vim.pack.add({
 	{ src = "https://github.com/nvim-lua/plenary.nvim" },
 	{ src = "https://github.com/CopilotC-Nvim/CopilotChat.nvim" },
 	{ src = "https://github.com/lewis6991/gitsigns.nvim" },
+	{ src = "https://github.com/echasnovski/mini.nvim", version = "stable" },
 })
 
 require 'mason'.setup()
@@ -115,6 +116,19 @@ require 'CopilotChat'.setup({
 	},
 })
 
+require 'mini.pairs'.setup()
+require 'mini.surround'.setup({
+	mappings = {
+		add = 'si',
+		delete = 'sd',
+		find = 'sf',
+		find_left = 'sF',
+		replace = 'sr',
+		surround = '',
+	},
+})
+
+-- this is some tests for mini.surround
 
 local map = vim.keymap.set
 
