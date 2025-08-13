@@ -16,7 +16,7 @@ vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.foldcolumn = '1' -- Show fold column
 vim.opt.foldtext = ""
-vim.opt.foldlevel = 99 -- Set a high fold level to keep folds open by default
+vim.opt.foldlevel = 99   -- Set a high fold level to keep folds open by default
 vim.opt.foldlevelstart = 1
 
 vim.g.mapleader = ' '
@@ -37,7 +37,8 @@ vim.pack.add({
 	{ src = "https://github.com/nvim-lua/plenary.nvim" },
 	{ src = "https://github.com/CopilotC-Nvim/CopilotChat.nvim" },
 	{ src = "https://github.com/lewis6991/gitsigns.nvim" },
-	{ src = "https://github.com/echasnovski/mini.nvim", version = "stable" },
+	{ src = "https://github.com/echasnovski/mini.nvim",          version = "stable" },
+	{ src = "https://github.com/norcalli/nvim-colorizer.lua" },
 })
 
 require 'mason'.setup()
@@ -54,6 +55,9 @@ require 'oil'.setup({
 	},
 })
 require 'which-key'.setup()
+require 'colorizer'.setup {
+	'*',
+}
 
 require 'copilot'.setup {
 	filetypes = {
@@ -93,9 +97,9 @@ require 'nvim-treesitter.configs'.setup({
 	sync_install = true,
 	auto_install = true,
 	highlight = {
-    enable = true,              -- false will disable the whole extension
-    additional_vim_regex_highlighting = false,
-  },
+		enable = true, -- false will disable the whole extension
+		additional_vim_regex_highlighting = false,
+	},
 })
 
 require 'lualine'.setup({})
@@ -103,16 +107,16 @@ require 'lualine'.setup({})
 require 'CopilotChat'.setup({
 	window = {
 		layout = 'float',
-		border = "rounded", -- Border style for the chat window
-		height = 40, -- Height of the chat window
-		width = 80, -- Width of the chat window
-		zindex = 100, -- Z-index for the chat window
+		border = "rounded",   -- Border style for the chat window
+		height = 40,          -- Height of the chat window
+		width = 80,           -- Width of the chat window
+		zindex = 100,         -- Z-index for the chat window
 		title = "Copilot Chat", -- Title for the chat window
 	},
 	headers = {
 		user = '👤 You: ',
-    assistant = '🤖 Copilot: ',
-    tool = '🔧 Tool: ',
+		assistant = '🤖 Copilot: ',
+		tool = '🔧 Tool: ',
 	},
 })
 
@@ -133,8 +137,42 @@ require 'mini.tabline'.setup({
 	show_icons = true,
 })
 
-
--- { this is some tests for mini.surround }
+require('mini.starter').setup({
+	header = [[
+                                             ___
+                                          ,o88888
+                                       ,o8888888'
+                 ,:o:o:oooo.        ,8O88Pd8888"
+             ,.::.::o:ooooOoOoO. ,oO8O8Pd888'"
+           ,.:.::o:ooOoOoOO8O8OOo.8OOPd8O8O"
+          , ..:.::o:ooOoOOOO8OOOOo.FdO8O8"
+         , ..:.::o:ooOoOO8O888O8O,COCOO"
+        , . ..:.::o:ooOoOOOO8OOOOCOCO"
+         . ..:.::o:ooOoOoOO8O8OCCCC"o
+            . ..:.::o:ooooOoCoCCC"o:o
+            . ..:.::o:o:,cooooCo"oo:o:
+         `   . . ..:.:cocoooo"'o:o:::'
+         .`   . ..::ccccoc"'o:o:o:::'
+        :.:.    ,c:cccc"':.:.:.:.:.'
+      ..:.:"'`::::c:"'..:.:.:.:.:.'
+    ...:.'.:.::::"'    . . . . .'
+   .. . ....:."' `   .  . . ''
+ . . . ...."'
+ .. . ."'
+.
+  ]],
+	footer = "Press :q to quit.",
+	items = {
+		{ action = "edit ~/.config/nvim/init.lua", name = "Edit config", section = "Config" },
+		{ action = "Pick files",                   name = "Find files",  section = "Pick" },
+		{ action = "Pick grep_live",               name = "Grep live",   section = "Pick" },
+	},
+	content_hooks = {
+		require('mini.starter').gen_hook.adding_bullet("» "),
+		require('mini.starter').gen_hook.aligning("center", "center"),
+	},
+})
+require 'mini.notify'.setup()
 
 local map = vim.keymap.set
 
@@ -156,6 +194,7 @@ map('n', '<leader>cc', ':CopilotChatToggle<CR>', { desc = 'Toggle CopilotChat', 
 -- redefine [b (tab nabigation) to another keymap <Tab> to use mini.tabline
 map('n', '<Tab>', ':bnext<CR>', { desc = 'Next tab', noremap = true, silent = true })
 map('n', '<S-Tab>', ':bprevious<CR>', { desc = 'Previous tab', noremap = true, silent = true })
+map('n', '<leader>d', ':bdelete<CR>', { desc = 'Delete current buffer', noremap = true, silent = true })
 
 local gitsigns = require('gitsigns')
 
@@ -163,7 +202,7 @@ map('n', '<leader>hp', gitsigns.preview_hunk, { desc = 'Preview hunk' })
 map('n', '<leader>hi', gitsigns.preview_hunk_inline, { desc = 'Preview hunk inline' })
 map('n', '<leader>hb', function()
 	gitsigns.blame_line({ full = true })
-end, { desc = "Blame in line" } )
+end, { desc = "Blame in line" })
 
 map('n', '<leader>hd', gitsigns.diffthis, { desc = 'Diff this hunk' })
 
@@ -179,7 +218,7 @@ map('n', '<leader>tb', gitsigns.toggle_current_line_blame, { desc = 'Toggle curr
 map('n', '<leader>tw', gitsigns.toggle_word_diff, { desc = 'Toggle word diff' })
 
 -- Text object
-map({'o', 'x'}, 'ih', gitsigns.select_hunk, { desc = 'Select hunk' })
+map({ 'o', 'x' }, 'ih', gitsigns.select_hunk, { desc = 'Select hunk' })
 
 
 vim.diagnostic.config({
