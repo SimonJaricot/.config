@@ -13,7 +13,7 @@ return {
           row = "center", -- Center vertically
           col = "center", -- Center horizontally
           relative = "editor",
-          border = "double", -- Use double border style
+          border = "rounded", -- Use double border style
         },
       },
     })
