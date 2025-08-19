@@ -8,13 +8,13 @@ end
 local function move_pane(key, direction)
 	return {
 		key = key,
-		mods = 'CTRL',
+		mods = "CTRL",
 		action = wezterm.action.ActivatePaneDirection(direction),
 	}
 end
 
 config = {
-	leader = { key = 'a', mods = 'CTRL', timeout_milliseconds = 1000 },
+	leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 },
 	--  default_cursor_style = "BlinkingBar",
 	default_cursor_style = "BlinkingUnderline",
 	cursor_blink_ease_in = "Constant",
@@ -35,31 +35,32 @@ config = {
 		top = 0,
 		bottom = 0,
 	},
-	window_background_opacity = 0.95,
+	window_background_opacity = 0.8,
+	color_scheme = "catppuccin-frappe",
+	macos_window_background_blur = 20,
 	initial_cols = 120,
 	initial_rows = 60,
 	keys = {
 		{
-			key = ')',
-			mods = 'CTRL',
-			action = wezterm.action.SplitPane {
-				direction = 'Down',
-			},
+			key = ")",
+			mods = "CTRL",
+			action = wezterm.action.SplitPane({
+				direction = "Down",
+			}),
 		},
 		{
-			key = '-',
-			mods = 'CTRL',
-			action = wezterm.action.SplitPane {
-				direction = 'Right',
-			},
+			key = "-",
+			mods = "CTRL",
+			action = wezterm.action.SplitPane({
+				direction = "Right",
+			}),
 		},
 		-- adding navigation keys
-		move_pane('h', 'Left'),
-		move_pane('j', 'Down'),
-		move_pane('k', 'Up'),
-		move_pane('l', 'Right'),
+		move_pane("h", "Left"),
+		move_pane("j", "Down"),
+		move_pane("k", "Up"),
+		move_pane("l", "Right"),
 	},
-
 }
 
 return config
