@@ -1,0 +1,64 @@
+return {
+  -- {
+  --   "echasnovski/mini.nvim",
+  --   version = false,
+  --   priority = 900,
+  --   config = function()
+  --     local starter = require("mini.starter")
+  --     local logo = table.concat({
+  --       "                                                     ",
+  --       "  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ",
+  --       "  ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║ ",
+  --       "  ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║ ",
+  --       "  ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║ ",
+  --       "  ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║ ",
+  --       "  ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ",
+  --       "                                                     ",
+  --     }, "\n")
+  --     local my_items = {
+  --       -- starter.sections.recent_files(5, false),
+  --       starter.sections.builtin_actions(),
+  --     }
+  --     local function get_explorer_width()
+  --       -- Check if snacks explorer is open
+  --       for _, win in ipairs(vim.api.nvim_list_wins()) do
+  --         local buf = vim.api.nvim_win_get_buf(win)
+  --         local ft = vim.api.nvim_buf_get_option(buf, "filetype")
+  --         if ft == "snacks_explorer" then
+  --           return vim.api.nvim_win_get_width(win)
+  --         end
+  --       end
+  --       return 0
+  --     end
+  --
+  --     local hooks = {
+  --       starter.gen_hook.adding_bullet(),
+  --       function(content, buf_id)
+  --         local explorer_width = get_explorer_width()
+  --         if explorer_width > 0 then
+  --           -- Adjust content to account for explorer width
+  --           local lines = vim.split(content, "\n")
+  --           local adjusted_lines = {}
+  --           local total_width = vim.api.nvim_win_get_width(0)
+  --           local available_width = total_width - explorer_width
+  --           local padding = math.floor(explorer_width / 2)
+  --
+  --           for _, line in ipairs(lines) do
+  --             table.insert(adjusted_lines, string.rep(" ", padding) .. line)
+  --           end
+  --           return table.concat(adjusted_lines, "\n")
+  --         else
+  --           return starter.gen_hook.aligning("center", "center")(content, buf_id)
+  --         end
+  --       end,
+  --     }
+  --     starter.setup({
+  --       header = logo,
+  --       autoopen = true,
+  --       evaluate_single = true,
+  --       items = my_items,
+  --       content_hooks = hooks,
+  --     })
+  --   end,
+  -- },
+}
